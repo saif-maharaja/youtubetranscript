@@ -1,0 +1,21 @@
+from youtube_transcript_api import YouTubeTranscriptApi
+
+# Provide the video URL
+video_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' # replace with your video URL
+
+# Extract video id from URL
+video_id = video_url.split("watch?v=")[1].split("&")[0]
+
+# Fetch the transcript
+transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
+
+# Combine all parts of transcript
+transcript = ""
+for part in transcript_list:
+    transcript += part['text'] + ' '
+
+# Write transcript to a text file
+with open('transcript.txt', 'w') as f:
+    f.write(transcript)
+
+print("Transcript has been written to transcript.txt")
